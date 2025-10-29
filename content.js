@@ -38,8 +38,11 @@
         // Heuristic:
         // 1. starts with "show more"
         // 2. Not obviously "comments" or "replies"
+        const isGenericShowMore = label.startsWith("show more");
+        const isNumericShowMore = /^show\s+\d+\s+more\b/.test(label);
+
         if (
-          label.startsWith("show more") &&
+          (isGenericShowMore || isNumericShowMore) &&
           !label.includes("comment") &&
           !label.includes("reply")
         ) {
