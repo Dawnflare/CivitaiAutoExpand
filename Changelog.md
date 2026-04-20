@@ -9,6 +9,10 @@ The format is:
 - `Removed` for features removed
 - `Security` for security-related changes
 
+## [1.0.1] - 2026-04-20
+### Added
+- Added support for the `civitai.red` domain.
+
 ## [1.0.0] - 2025-10-28
 ### Added
 - Initial version of the "Civitai Auto Expand Prompts" extension.

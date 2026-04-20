@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Civitai Auto Expand Prompts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Auto-expands 'Show more' in the Prompt panel on Civitai.",
   "icons": {
     "32": "icons/icon32.png",
@@ -9,7 +9,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://civitai.com/*"],
+      "matches": ["*://civitai.com/*", "*://civitai.red/*"],
       "js": ["content.js"],
       "run_at": "document_idle"
     }

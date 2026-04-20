@@ -4,7 +4,7 @@ Automatically expands truncated prompt text on Civitai image pages so you never 
 
 ## What this extension does
 
-When you open an image page on [civitai.com](https://civitai.com), the right-side panel shows useful generation metadata:
+When you open an image page on [civitai.com](https://civitai.com) or [civitai.red](https://civitai.red), the right-side panel shows useful generation metadata:
 - Prompt
 - Negative prompt
 - Sampler / Steps / CFG / etc.
@@ -21,16 +21,16 @@ It also keeps working as you move between images within Civitai (which behaves l
 
 ## Status
 
-- Version: `1.0.0`
+- Version: `1.0.1`
 - Manifest: v3
 - Browsers: Tested on Brave / Chrome desktop
-- Scope: Only runs on `https://civitai.com/*`
+- Scope: Only runs on `https://civitai.com/*` and `https://civitai.red/*`
 
 This is an early utility release, focused on one job: auto-expand the prompt panel.
 
 ## How it works (high level)
 
-1. A content script (`content.js`) runs on any `civitai.com/*` page.
+1. A content script (`content.js`) runs on any `civitai.com/*` or `civitai.red/*` page.
 2. It looks for the metadata panel that contains `Prompt`, `Negative prompt`, etc.
 3. Inside that panel, it searches for clickable elements whose text is "Show more".
 4. It clicks those elements automatically and marks them so it doesn’t click them over and over.
@@ -71,7 +71,7 @@ If it doesn’t work at first:
 ## Files in this repo
 
 - `manifest.json`  
-  Chrome/Brave extension manifest (Manifest V3). Declares this as a content script that runs on `civitai.com/*`.
+  Chrome/Brave extension manifest (Manifest V3). Declares this as a content script that runs on `civitai.com/*` and `civitai.red/*`.
 
 - `content.js`  
   The logic that:
@@ -95,7 +95,7 @@ If it doesn’t work at first:
 - It does not send data off your machine.
 - It does not add UI, context menus, or hotkeys.
 - It does not require broad host permissions.  
-  It only runs on pages that match `*://civitai.com/*`.
+  It only runs on pages that match `*://civitai.com/*` and `*://civitai.red/*`.
 
 ## Roadmap / future ideas
 
