@@ -25,12 +25,10 @@
     // Step 2. Within those scopes, look for "Show more" UI elements that are clickable.
     const candidates = [];
     for (const scope of scopes) {
-      // Typical clickable elements
-      const maybeButtons = scope.querySelectorAll(
-        'button, a, [role="button"], .cursor-pointer, .underline, .text-primary, .text-accent'
-      );
+      // Check all elements within the panel to catch unstyled text components
+      const allElements = scope.querySelectorAll('*');
 
-      for (const el of maybeButtons) {
+      for (const el of allElements) {
         const label = (el.innerText || el.textContent || "").trim().toLowerCase();
         // We only want "show more", not "load more comments", etc.
         if (!label) continue;
@@ -46,7 +44,20 @@
           !label.includes("comment") &&
           !label.includes("reply")
         ) {
-          candidates.push(el);
+          // Avoid double-clicking by only selecting the deepest matching element
+          let hasMatchingChild = false;
+          for (const child of el.children) {
+            const childLabel = (child.innerText || child.textContent || "").trim().toLowerCase();
+            const childIsGeneric = childLabel.startsWith("show more");
+            const childIsNumeric = /^show\s+\d+\s+more\b/.test(childLabel);
+            if ((childIsGeneric || childIsNumeric) && !childLabel.includes("comment") && !childLabel.includes("reply")) {
+              hasMatchingChild = true;
+              break;
+            }
+          }
+          if (!hasMatchingChild) {
+            candidates.push(el);
+          }
         }
       }
     }
